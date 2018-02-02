@@ -12,7 +12,7 @@ var w = 640,
 var raster, param, pmat, resultMat, detector;
 
 var swarm
-var nGerms = 50
+var nGerms = 200
 
 var pg
 var wpg = 800
@@ -22,9 +22,7 @@ var hpg = 800
 function setup() {
     pixelDensity(1); // this makes the internal p5 canvas smaller
     capture = createCapture(VIDEO);
-    createCanvas(windowWidth, windowHeight);
-    w = windowWidth
-    h = windowHeight
+    createCanvas(w, h);
     capture.size(w, h);
     capture.hide();
 
@@ -93,21 +91,21 @@ function draw() {
             v[1] = -v[1] * h2 / v[3] + h2;
         });
 
-          // noStroke();
-          // fill(0, millis() % 255);
-          // beginShape();
-          // verts.forEach(function (v) {
-          //     vertex(v[0], v[1]);
-          // });
-          // endShape();
-          //
-          // push();
-          // noStroke();
-          // fill(0,random(150,250),0,150);
-          // var dim = abs(verts[0][0]-verts[1][0])*abs(verts[1][1]-verts[2][1])/10;
-          // constrain(dim, 2, 15);
-          // // console.log(dim);
-          // ellipse(verts[0][0]+random(-2,2), verts[0][1]+random(-2,2), dim , dim);
+        noStroke();
+        fill(0, millis() % 255);
+        beginShape();
+        verts.forEach(function (v) {
+            vertex(v[0], v[1]);
+        });
+        endShape();
+
+        push();
+          noStroke();
+          fill(0,random(150,250),0,150);
+          var dim = abs(verts[0][0]-verts[1][0])*abs(verts[1][1]-verts[2][1])/10;
+          constrain(dim, 2, 15);
+          // console.log(dim);
+          ellipse(verts[0][0]+random(-2,2), verts[0][1]+random(-2,2), dim , dim);
 
           // verts.forEach(function (v) {
           //   ellipse(v[0]+random(-2,2), v[1]+random(-2,2), dim , dim);
@@ -195,7 +193,7 @@ function Germ(_x, _y, _speed, _type, start) {
 
     if (this.type==1) {
       pg.push()
-      pg.translate(ox-w/2,oy-h/2,0)
+      pg.translate(ox,oy,0)
       pg.translate(this.x,this.y)
       pg.translate(this.rocking.x, this.rocking.y)
       pg.fill(200,240,0,this.opacity)
